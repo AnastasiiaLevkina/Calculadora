@@ -1,68 +1,156 @@
-let selectedNum = "";
-let num1 = "";
-let num2;
+
+let num1, num2;
+let operator;
 let result;
 
-let operation = "";
 
-function inputNumber(number)
-{
-    if (selectedNum.length < 9)
-    {
-           selectedNum += number; 
-    }
-}
+function inputNumber(num){
 
-// Possible operations: "+", "-", "*" (×), "/"
-function selectOperation(op)
-{
-    operation = op;
-}
+    const header = document.querySelector("header");
+    
+    if(num === ","){
 
-function clear()
-{
-    if (selectedNum != "0")
-    {
-        selectedNum = selectedNum.replace(/.$/, "");
-        if (selectedNum == "")
-            selectedNum = "0";
-    }
-}
+        disableComma()
 
-function clearAll()
-{
-    selectedNum = "";
-    num1 = "";
-    num2 = "";
-    // Change selected num in the calc
-    // De-select the operation button
-}
-
-function executeOp()
-{
-    if (num2 == "") num2 = num1;
-    if (operation == "/" && parseFloat(num2) == 0.0)
-    {
-        window.alert("ERROR: Division entre 0!");
-        clearAll();
     }
 
-    else 
-    {
-        // Execute operation
-        switch(operation)
-        {
-            case "+":
-                result = parseFloat(num1) + parseFloat(num2);
-                break;
-            case "-":
-                result = parseFloat(num1) - parseFloat(num2);
-                break;
-            case "*":
-                result = parseFloat(num1) * parseFloat(num2);
-                break;
-            default:
-                result = parseFloat(num1) / parseFloat(num2);
+    if(num === "," && header.textContent === "0"){
+
+        header.textContent = "0,"
+
+    } else  {
+
+        if(header.textContent === "0"){
+
+            header.textContent = num
+    
+        } else if (header.textContent.length < 9){
+    
+            header.textContent = header.textContent + num;  
+    
         }
+
+    }
+
+}
+
+function disableComma(){
+    
+    const comma = document.getElementById("comma")
+
+    comma.classList.add("inactive")    
+
+    comma.setAttribute("disabled", "")
+
+}
+
+function enableComma(){
+    
+    const comma = document.getElementById("comma")
+
+    comma.classList.remove("inactive")    
+
+    comma.removeAttribute("disabled")
+
+}
+
+function inputOp(op){
+
+    operator = op;
+    const header = document.querySelector("header");
+
+    num1 = parseFloat(header.textContent)
+    header.textContent = "0"
+
+}
+
+function clear(){
+
+    const header = document.querySelector("header");
+
+    header.textContent = "0"
+    enableComma()
+
+}
+
+function del(){
+
+    const header = document.querySelector("header");
+
+    if (header.textContent != "0"){
+
+        if(header.textContent[header.textContent.length - 1] == ","){
+
+            enableComma();
+
+        }
+
+        header.textContent = header.textContent.slice(0,header.textContent.length - 1)
+
+        if(header.textContent.length === 0){
+
+             header.textContent = "0"
+            enableComma()
+        }
+
+    }
+
+}
+
+function operate(){
+
+    switch (operator) {
+        case "+":
+            
+            break;
+    
+        default:
+            break;
     }
 }
+
+function equal(){
+
+    
+
+}
+
+const buttons = document.querySelectorAll("button.num");
+
+buttons.forEach(button => {
+    button.addEventListener("click",(event)=> {
+
+        let clickedNum = event.target.textContent
+
+        inputNumber(clickedNum)
+        console.log(clickedNum);
+    })
+})
+
+const clearButton = document.getElementById("clearButton");
+
+clearButton.addEventListener("click",(event)=> {
+
+    clear()
+
+})
+
+
+const delButton = document.getElementById("delButton");
+
+delButton.addEventListener("click",(event)=> {
+
+    del()
+
+})
+
+const operators = document.querySelectorAll("button.op");
+
+operators.forEach(button => {
+    button.addEventListener("click",(event)=> {
+
+        let clickedOp = event.target.textContent
+
+        inputNumber(clickedOp)
+    })
+})

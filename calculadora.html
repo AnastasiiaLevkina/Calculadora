@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <title>Calculadora</title>
     <link rel="stylesheet" href="stylesheet.css">
+    <script src="calculadora.js" defer></script>
 </head>
 <body>
     <div id="main">
         <div id="calculadora">
             <header>0</header>
             <main>
-                <button class="long">C</button>
-                <button class="num">DEL</button>
+                <button class="long" id="clearButton">C</button>
+                <button id="delButton">DEL</button>
                 <button class="op inactive">/</button>
                 <button class="num">1</button>
                 <button class="num">2</button>
@@ -25,7 +26,7 @@
                 <button class="num">8</button>
                 <button class="num">9</button>
                 <button class="op active active-plus">-</button>
-                <button class="num">,</button>
+                <button class="num" id="comma">,</button>
                 <button class="num">0</button>
                 <button class="long">=</button>
             </main>
