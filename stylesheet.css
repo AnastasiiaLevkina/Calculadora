@@ -42,7 +42,7 @@ button {
 
 }
 
-button:active:not(.op){
+button:active:not(.op,.inactive){
 
   filter:brightness(3);
 
@@ -61,7 +61,7 @@ button:active:not(.op){
 .inactive{
 
   filter:brightness(0.7);
-
+  cursor: not-allowed;
 }
 
 .long{
